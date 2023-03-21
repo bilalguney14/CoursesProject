@@ -59,20 +59,8 @@ Proje:Student Management System
         } while (select != 0);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private static int getId(Scanner scanner) {
+        System.out.print("Ders Id: ");
+        return scanner.nextInt();
+    }
 }

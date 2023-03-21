@@ -1,4 +1,8 @@
+
 import java.util.Scanner;
+
+import java.util.List;
+
 
 public class DersServis {
 
@@ -118,9 +122,17 @@ public class DersServis {
 
 
 
+    public void listDersByeNameOrLastname(){
+        System.out.println("Ders adı:");
+        String dersAd = inp.nextLine();
+        List<Ders> dersList = repository.findDersByNameOrLastname(dersAd );
+        if (dersList.size()==0){
+            System.out.println("Bu ders adı bulunamadı");
+        }else {
+            dersList.forEach(System.out::println);
+        }
 
-
-
+    }
 
 
 

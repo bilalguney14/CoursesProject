@@ -12,7 +12,10 @@ public class DersServis {
 
 
 
-
+//13-tüm dersleri listeleme
+public void getAllStudents(){
+    repository.findAll();
+}
 
 
 
@@ -54,40 +57,52 @@ public class DersServis {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      public Ders getDersById(int dersKodu) {
-        Ders ders = repository.findDersById(id);
-        return ders;
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   public void deleteDers(int id){
+        //bu code ile ders var mı??-->best practice
+        repository.delete(id);
     }
 
 
 
 
-    public void listDersByeNameOrLastname(){
+
+
+
+
+
+
+
+
+
+
+
+public Ders getDersById(int dersKodu){
+    Ders ders=repository.findDersById(id);
+    return ders;
+}
+
+
+
+
+
+
+
+
+
+public void listDersByeNameOrLastname(){
         System.out.println("Ders adı:");
         String dersAd = inp.nextLine();
         List<Ders> dersList = repository.findDersByNameOrLastname(dersAd );

@@ -2,39 +2,6 @@ import java.sql.*;
 
 public class DersRepository {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void getPreparedStatement(String sql) {
         try {
             this.prst = conn.prepareStatement(sql);
@@ -58,6 +25,7 @@ public class DersRepository {
             }
         }
     }
+
 
 
 
@@ -218,6 +186,7 @@ public class DersRepository {
 
 
     }
+
 
 
 

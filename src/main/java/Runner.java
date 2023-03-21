@@ -58,4 +58,21 @@ Proje:Student Management System
 
         } while (select != 0);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

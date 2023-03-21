@@ -70,29 +70,20 @@ public void getAllStudents(){
    
    
    
-   public void deleteDers(int id){
+   
+
+
+public void deleteDers(int id){
         //bu code ile ders var mı??-->best practice
         repository.delete(id);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 public Ders getDersById(int dersKodu){
     Ders ders=repository.findDersById(id);
     return ders;
 }
+
 
 
 
@@ -111,6 +102,7 @@ public void listDersByeNameOrLastname(){
         }else {
             dersList.forEach(System.out::println);
         }
+
 
     }
 

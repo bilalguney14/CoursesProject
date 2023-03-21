@@ -149,6 +149,28 @@ public class DersRepository {
 
 
 
+    public void delete(int id) {
+        getConnection();
+        String sql="DELETE FROM t_ders WHERE dersKodu=?";
+        getPreparedStatement(sql);
+        try {
+            prst.setDersKodu(1,dersKodu);
+            int deleted=prst.executeUpdate();
+            if (deleted>0){
+                System.out.println("dersKodu:"+dersKodu+" olan kayıt başarıyla silinmiştir");
+            }else{
+                System.out.println("dersKodu:"+dersKodu+" bulunamadı");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                prst.close();
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
 
 
@@ -157,18 +179,7 @@ public class DersRepository {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    public Ders dersbul(int kod) {
+public Ders dersbul(int kod) {
         Connection con;
         Statement st;
         Ders ders = null;
@@ -190,6 +201,7 @@ public class DersRepository {
             ders.setDersKodu(kod);
             ders = new Ders(rS.getString("dersAdi"), rS.getString("kredi"),
                     rS.getString("ogrSayisi"), rS.getString("ogrAdi"));
+
 
         } catch (SQLException e) {
             System.out.println("e.getMessage() = " + e.getMessage());

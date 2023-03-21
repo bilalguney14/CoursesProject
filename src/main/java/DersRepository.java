@@ -119,34 +119,33 @@ public class DersRepository {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //20-veri güncelleme
+    public void update(Ders ders) {
+        getConnection();
+        String sql="UPDATE t_ders SET dersAdi=?,kredi=?,ogrSayisi=?,ogrAdi=? WHERE dersKodu=?";
+        getPreparedStatement(sql);
+        try {
+            prst.setString(1,ders.getDersAdi());
+            prst.setString(2,ders.getKredi());
+            prst.setString(3,ders.getOgrSayisi());
+            prst.setString(4,ders.getOgrAdi());
+            prst.setInt(5,ders.getDersKodu());
+            int updated=prst.executeUpdate();
+            if(updated>0){
+                System.out.println("Ders başarıyla güncellendi.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                prst.close();
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+}
 
 
 

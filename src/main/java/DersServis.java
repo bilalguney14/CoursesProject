@@ -19,12 +19,8 @@ public void getAllStudents(){
 
 
 
-
-
-
        //11-öğrenci kaydetme
        public void saveDers() {
-
         System.out.println("Ders Adi: ");
         String dersAdi = inp.nextLine().trim();
         System.out.println("Kredi: ");
@@ -44,7 +40,27 @@ public void getAllStudents(){
 
 
 
+ public void updateDers(int dersKodu){
+        Ders ders =getDersById(dersKodu);
+        if(ders==null){
+            System.out.println("ders bulunamadi.");
+        }else{
+            System.out.println("Ders adi: ");
+            String dersAdi=inp.nextLine();
+            System.out.println("Kredi: ");
+            String kredi=inp.nextLine();
+            System.out.println("Ogrenci sayisi: ");
+            String ogrSayisi=inp.nextLine();
+            System.out.println("Ogretmen Adi: ");
+            String ogrAdi=inp.nextLine();
 
+
+            ders.setDersAdi(dersAdi);
+            ders.setKredi(kredi);
+            ders.setOgrSayisi(ogrSayisi);
+            ders.setOgrAdi(ogrAdi);
+            repository.update(ders);
+        }
 
 
 
@@ -76,6 +92,7 @@ public void getAllStudents(){
 public void deleteDers(int id){
         //bu code ile ders var mı??-->best practice
         repository.delete(id);
+
     }
 
 

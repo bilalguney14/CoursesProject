@@ -1,4 +1,5 @@
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -84,62 +85,41 @@ public class DersRepository {
     }
 
 
+  
+  
+  
+  
+  public void findAll(){
+        getConnection();
+        getStatement();
+        String sql = "select * from t_ders";
+        ResultSet rs = st.executeQuery(sql);
+        System.out.println("+"+"-".repeat(70)+"+");
+        System.out.printf("| %-11s | %-15s | %-13s | %-5s | %-15s | \n",
+                "Ders Kodu","Ders Adi","Ders Kredisi","Ogr. Sayisi","Ogretmen");
+        try {
+            while (rs.next()){
+                System.out.printf("| %-11s | %-15s | %-13s | %-5s | %-15s | \n",
+                        rs.getInt("dersKodu"),rs.getString("dersAdi"),rs.getDouble("kredi"),
+                        rs.getInt("ogrSayisi"),rs.getString("ogrAdi"));
+            }
+            System.out.println("+"+"-".repeat(70)+"+");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                st.close();
+                conn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //20-veri güncelleme
+ 
+ //20-veri güncelleme
     public void update(Ders ders) {
         getConnection();
         String sql="UPDATE t_ders SET dersAdi=?,kredi=?,ogrSayisi=?,ogrAdi=? WHERE dersKodu=?";

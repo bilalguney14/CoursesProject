@@ -34,7 +34,8 @@ public class Ders {
     }
 
     public void setDersAdi(String dersAdi) {
-        dersAdi = dersAdi;
+
+        this.dersAdi = dersAdi;
     }
 
     public String getKredi() {
@@ -42,7 +43,7 @@ public class Ders {
     }
 
     public void setKredi(String kredi) {
-        kredi = kredi;
+        this.kredi = kredi;
     }
 
     public String getOgrSayisi() {

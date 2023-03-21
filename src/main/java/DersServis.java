@@ -37,12 +37,15 @@ public class DersServis {
 
 
 
+<<<<<<< HEAD
 ///////////////////////////////////////////////////////////////////////////
 //13-tüm dersleri listeleme
 public void getAllStudents(){
     repository.findAll();
 }
 ///////////////////////////////////////////////////////////////////////////
+=======
+>>>>>>> cb8ac1182d67556c23dc56a2a5c1f3db0bc2a5ea
 
 
 
@@ -72,12 +75,231 @@ public void getAllStudents(){
 
 
 
+<<<<<<< HEAD
 //////////////////////////////////////////////////////////////////////////////
 public void deleteDers(int id){
     //bu code ile ders var mı??-->best practice
     repository.delete(id);
 }
 /////////////////////////////////////////////////////////////////////////////
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public Ders getDersById(int dersKodu){
+        Ders ders=repository.findDersById(id);
+        return ders;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> cb8ac1182d67556c23dc56a2a5c1f3db0bc2a5ea
 
 
 

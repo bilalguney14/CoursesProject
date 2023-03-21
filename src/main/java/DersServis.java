@@ -19,13 +19,8 @@ public class DersServis {
 
 
 
-
-
-
-
-
-    //11-öğrenci kaydetme
-    public void saveDers() {
+       //11-öğrenci kaydetme
+       public void saveDers() {
 
         System.out.println("Ders Adi: ");
         String dersAdi = inp.nextLine().trim();
@@ -39,7 +34,6 @@ public class DersServis {
         Ders newDers = new Ders(dersAdi, kredi, ogrSayisi, ogrAdi);
         //   DersRepository repository = new DersRepository();
         repository.save(newDers);
-
     }
 
 
@@ -74,50 +68,21 @@ public class DersServis {
 
 
 
-
-
-
-
-
-
-
-
-
-
-    public Ders getDersById(int dersKodu) {
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      public Ders getDersById(int dersKodu) {
         Ders ders = repository.findDersById(id);
         return ders;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

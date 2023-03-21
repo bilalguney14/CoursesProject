@@ -1,14 +1,38 @@
 import java.sql.*;
 
 public class DersRepository {
-
-    private void getPreparedStatement(String sql) {
+    private Connection conn;
+    private Statement st;
+    private PreparedStatement prst;
+    
+    private void  getConnection(){
         try {
-            this.prst = conn.prepareStatement(sql);
+            this.conn=DriverManager.getConnection("jdbc:postgrsql://localhost:5432/jdbc_db","dev_user","password");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+
+    private void getPreparedStatement(String sql) {
+        try {
+            this.prst = conn.prepareStatement(sql);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+   private void getStatement(){
+ 
+        try {
+            this.st=conn.createStatement();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public void createTable() {
         getConnection();
         getStatement();
@@ -26,9 +50,7 @@ public class DersRepository {
         }
     }
 
-
-
-
+}
 
 
 
@@ -258,4 +280,3 @@ public class DersRepository {
 
 
 
-}

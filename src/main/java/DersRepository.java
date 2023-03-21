@@ -12,17 +12,6 @@ public class DersRepository {
         }
     }
 
-    private void getStatement(){
-        try {
-            this.st=conn.createStatement();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-}
-
-
 
     private void getPreparedStatement(String sql) {
         try {

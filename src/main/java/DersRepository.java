@@ -10,10 +10,10 @@ public class DersRepository {
     private Connection conn;
     private Statement st;
     private PreparedStatement prst;
-    
-    private void  getConnection(){
+
+    private void getConnection() {
         try {
-            this.conn=DriverManager.getConnection("jdbc:postgrsql://localhost:5432/jdbc_db","dev_user","password");
+            this.conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/courses","user","password");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -29,10 +29,10 @@ public class DersRepository {
         }
     }
 
-   private void getStatement(){
- 
+    private void getStatement() {
+
         try {
-            this.st=conn.createStatement();
+            this.st = conn.createStatement();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -43,7 +43,7 @@ public class DersRepository {
         getConnection();
         getStatement();
         try {
-            st.execute("CREATE TABLE IF NOT EXISTS t_ders (dersKodu SERIAL, dersAdi VARCHAR(50), kredi INT, ogrSayisi INT , ogrAdi VARCHAR(50)");
+            st.execute("CREATE TABLE IF NOT EXISTS t_ders (dersKodu SERIAL, dersAdi VARCHAR(50), kredi VARCHAR(5), ogrSayisi VARCHAR(5) , ogrAdi VARCHAR(50))");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -56,9 +56,6 @@ public class DersRepository {
         }
     }
 
-}
-
-
 
     //Ders ekleme repository
     public void save(Ders ders) {
@@ -66,47 +63,44 @@ public class DersRepository {
         String sql = "INSERT INTO t_ders(dersAdi,kredi,ogrSayisi,ogrAdi) VALUES(?,?,?,?)";
         getPreparedStatement(sql);
         try {
-            prst.setString(1,ders.getDersAdi());
-            prst.setString(2,ders.getKredi());
-            prst.setString(3,ders.getOgrSayisi());
-            prst.setString(4,ders.getOgrAdi());
+            prst.setString(1, ders.getDersAdi());
+            prst.setString(2, ders.getKredi());
+            prst.setString(3, ders.getOgrSayisi());
+            prst.setString(4, ders.getOgrAdi());
             prst.executeUpdate();
             System.out.println("Ders ekleme işlemi başarıyla gerçekleşti..");
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             try {
                 prst.close();
                 conn.close();
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
 
-  
-  
-  
-  
-  public void findAll(){
+    public void findAll() {
         getConnection();
         getStatement();
         String sql = "select * from t_ders";
-        ResultSet rs = st.executeQuery(sql);
-        System.out.println("+"+"-".repeat(70)+"+");
-        System.out.printf("| %-11s | %-15s | %-13s | %-5s | %-15s | \n",
-                "Ders Kodu","Ders Adi","Ders Kredisi","Ogr. Sayisi","Ogretmen");
         try {
-            while (rs.next()){
+            ResultSet rs = st.executeQuery(sql);
+            System.out.println("+" + "-".repeat(70) + "+");
+            System.out.printf("| %-11s | %-15s | %-13s | %-5s | %-15s | \n",
+                    "Ders Kodu", "Ders Adi", "Ders Kredisi", "Ogr. Sayisi", "Ogretmen");
+
+            while (rs.next()) {
                 System.out.printf("| %-11s | %-15s | %-13s | %-5s | %-15s | \n",
-                        rs.getInt("dersKodu"),rs.getString("dersAdi"),rs.getDouble("kredi"),
-                        rs.getInt("ogrSayisi"),rs.getString("ogrAdi"));
+                        rs.getInt("dersKodu"), rs.getString("dersAdi"), rs.getString("kredi"),
+                        rs.getInt("ogrSayisi"), rs.getString("ogrAdi"));
             }
-            System.out.println("+"+"-".repeat(70)+"+");
+            System.out.println("+" + "-".repeat(70) + "+");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             try {
                 st.close();
                 conn.close();
@@ -117,26 +111,24 @@ public class DersRepository {
     }
 
 
-
- 
- //20-veri güncelleme
+    //20-veri güncelleme
     public void update(Ders ders) {
         getConnection();
-        String sql="UPDATE t_ders SET dersAdi=?,kredi=?,ogrSayisi=?,ogrAdi=? WHERE dersKodu=?";
+        String sql = "UPDATE t_ders SET dersAdi=?,kredi=?,ogrSayisi=?,ogrAdi=? WHERE dersKodu=?";
         getPreparedStatement(sql);
         try {
-            prst.setString(1,ders.getDersAdi());
-            prst.setString(2,ders.getKredi());
-            prst.setString(3,ders.getOgrSayisi());
-            prst.setString(4,ders.getOgrAdi());
-            prst.setInt(5,ders.getDersKodu());
-            int updated=prst.executeUpdate();
-            if(updated>0){
+            prst.setString(1, ders.getDersAdi());
+            prst.setString(2, ders.getKredi());
+            prst.setString(3, ders.getOgrSayisi());
+            prst.setString(4, ders.getOgrAdi());
+            prst.setInt(5, ders.getDersKodu());
+            int updated = prst.executeUpdate();
+            if (updated > 0) {
                 System.out.println("Ders başarıyla güncellendi.");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             try {
                 prst.close();
                 conn.close();
@@ -145,33 +137,25 @@ public class DersRepository {
             }
         }
     }
-}
 
 
 
 
-
-
-
-
-
-
-
-    public void delete(int id) {
+    public void delete(int dersKodu) {
         getConnection();
-        String sql="DELETE FROM t_ders WHERE dersKodu=?";
+        String sql = "DELETE FROM t_ders WHERE dersKodu=?";
         getPreparedStatement(sql);
         try {
-            prst.setDersKodu(1,dersKodu);
-            int deleted=prst.executeUpdate();
-            if (deleted>0){
-                System.out.println("dersKodu:"+dersKodu+" olan kayıt başarıyla silinmiştir");
-            }else{
-                System.out.println("dersKodu:"+dersKodu+" bulunamadı");
+            prst.setInt(1, dersKodu);
+            int deleted = prst.executeUpdate();
+            if (deleted > 0) {
+                System.out.println("dersKodu:" + dersKodu + " olan kayıt başarıyla silinmiştir");
+            } else {
+                System.out.println("dersKodu:" + dersKodu + " bulunamadı");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             try {
                 prst.close();
                 conn.close();
@@ -179,76 +163,58 @@ public class DersRepository {
                 System.out.println(e.getMessage());
             }
         }
+    }
 
-
-
-
-
-
-
-
-public Ders dersbul(int kod) {
-        Connection con;
-        Statement st;
+/*
+student=new Student();
+                student.setId(resultSet.getInt("id"));
+                student.setName(resultSet.getString("name"));
+                student.setLastname(resultSet.getString("lastname"));
+                student.setCity(resultSet.getString("city"));
+                student.setAge(resultSet.getInt("age"));
+ */
+    public Ders findDersById(int dersKodu) {
         Ders ders = null;
+        getConnection();
+        String sql = "Select * from t_ders where dersKodu = ?";
+        getPreparedStatement(sql);
         try {
-            con = DriverManager.getConnection("jbdc:postgresql://localhost:5432/database", "postgres", "password");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            st = con.createStatement();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        String sql = "Select * from t_ders where dersKodu=" + kod;
-        try {
-            ResultSet rS = st.executeQuery(sql);
-            rS.next();
-            ders.setDersKodu(kod);
-            ders = new Ders(rS.getString("dersAdi"), rS.getString("kredi"),
-                    rS.getString("ogrSayisi"), rS.getString("ogrAdi"));
-
-
+            prst.setInt(1,dersKodu);
+            ResultSet rS = prst.executeQuery();
+            if(rS.next()) {
+                ders=new Ders();
+                ders.setDersKodu(rS.getInt("dersKodu"));
+                ders.setDersAdi(rS.getString("dersAdi"));
+                ders.setKredi(rS.getString("kredi"));
+                ders.setOgrSayisi(rS.getString("ogrSayisi"));
+                ders.setOgrAdi(rS.getString("ogrAdi"));
+            }
         } catch (SQLException e) {
             System.out.println("e.getMessage() = " + e.getMessage());
         } finally {
             try {
-                con.close();
+                conn.close();
                 st.close();
             } catch (SQLException e) {
                 System.out.println("e.getMessage() = " + e.getMessage());
             }
-
         }
-
         return ders;
-
-
     }
 
 
-
-
-
-
-
-
-
-
-    public static List<Ders> findDersByNameOrLastname(String nameOrLastname){
-        List<Ders> list=new ArrayList<>();
+    public  List<Ders> findDersByNameOrLastname(String nameOrLastname) {
+        List<Ders> list = new ArrayList<>();
         getConnection();
-        String searched="%"+nameOrLastname+"%";
-        String sql="SELECT * FROM t_ders WHERE dersAdi ILIKE ? OR ogrAdi ILIKE ?";
+        String searched = "%" + nameOrLastname + "%";
+        String sql = "SELECT * FROM t_ders WHERE dersAdi ILIKE ? OR ogrAdi ILIKE ?";
         getPreparedStatement(sql);
         try {
-            prst.setString(1,searched);
-            prst.setString(2,searched);
-            ResultSet result=prst.executeQuery();
-            while (result.next()){
-                Ders ders=new Ders();
+            prst.setString(1, searched);
+            prst.setString(2, searched);
+            ResultSet result = prst.executeQuery();
+            while (result.next()) {
+                Ders ders = new Ders();
                 ders.setDersKodu(result.getInt("dersKodu"));
                 ders.setDersAdi(result.getString("dersAdi"));
                 ders.setKredi(result.getString("kredi"));
@@ -258,71 +224,20 @@ public Ders dersbul(int kod) {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             try {
-                prst.close();
                 conn.close();
-                private void getPreparedStatement(String sql) {
-                    try {
-                        this.prst = conn.prepareStatement(sql);
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-                return list;
+                st.close();
+            } catch (SQLException e) {
+                System.out.println("e.getMessage() = " + e.getMessage());
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+        return list;
+    }
 
 
 }
-
-
-
 
 
 

@@ -20,8 +20,10 @@ Proje:Student Management System
     }
 
     public static void start() {
-
+        DersServis dersServis = new DersServis();
         Scanner inp = new Scanner(System.in);
+        dersServis.createTable();
+
         int select;
         do {
             System.out.println("Kurs Yonetim Paneli");
@@ -32,24 +34,28 @@ Proje:Student Management System
             System.out.println("5-Ders Filtreleme");
             System.out.println("0-CIKIS");
             select = inp.nextInt();
-            switch (select){
+            switch (select) {
                 case 1:
-                    //ders kayit
+                    dersServis.saveDers();
                     break;
                 case 2:
+                    dersServis.getAll();
                     //ders goruntuleme
                     break;
-                    case 3:
+                case 3:
+                    dersServis.updateDers(getId(inp));
                     //ders guncelleme
                     break;
-                    case 4:
+                case 4:
+                    dersServis.deleteDers(getId(inp));
                     //ders silme
                     break;
-                    case 5:
+                case 5:
+                    dersServis.listDersByeNameOrLastname();
                     //ders filtreleme
                     break;
-                    case 0:
-                        System.out.println("İyi Gunler");
+                case 0:
+                    System.out.println("İyi Gunler");
                     break;
                 default:
                     System.out.println("Hatali Gİris");

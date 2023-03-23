@@ -9,18 +9,14 @@ public class DersServis {
 
     Scanner inp = new Scanner(System.in);
 
+    DersRepository repository = new DersRepository();
 
+    public void createTable() {
+        repository.createTable();
+    }
 
-
-//13-tüm dersleri listeleme
-public void getAllStudents(){
-    repository.findAll();
-}
-
-
-
-       //11-öğrenci kaydetme
-       public void saveDers() {
+    //11-öğrenci kaydetme
+    public void saveDers() {
         System.out.println("Ders Adi: ");
         String dersAdi = inp.nextLine().trim();
         System.out.println("Kredi: ");
@@ -35,24 +31,25 @@ public void getAllStudents(){
         repository.save(newDers);
     }
 
+    //13-tüm dersleri listeleme
+    public void getAll() {
+        repository.findAll();
+    }
 
 
-
-
-
- public void updateDers(int dersKodu){
-        Ders ders =getDersById(dersKodu);
-        if(ders==null){
+    public void updateDers(int dersKodu) {
+        Ders ders = getDersById(dersKodu);
+        if (ders == null) {
             System.out.println("ders bulunamadi.");
-        }else{
+        } else {
             System.out.println("Ders adi: ");
-            String dersAdi=inp.nextLine();
+            String dersAdi = inp.nextLine();
             System.out.println("Kredi: ");
-            String kredi=inp.nextLine();
+            String kredi = inp.nextLine();
             System.out.println("Ogrenci sayisi: ");
-            String ogrSayisi=inp.nextLine();
+            String ogrSayisi = inp.nextLine();
             System.out.println("Ogretmen Adi: ");
-            String ogrAdi=inp.nextLine();
+            String ogrAdi = inp.nextLine();
 
 
             ders.setDersAdi(dersAdi);
@@ -61,268 +58,33 @@ public void getAllStudents(){
             ders.setOgrAdi(ogrAdi);
             repository.update(ders);
         }
+    }
 
+    public void deleteDers(int dersKodu) {
 
-
-
-
-
-
-
-
-
-
-
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-
-
-public void deleteDers(int id){
-        //bu code ile ders var mı??-->best practice
-        repository.delete(id);
+        repository.delete(dersKodu);
 
     }
 
 
-public Ders getDersById(int dersKodu){
-    Ders ders=repository.findDersById(id);
-    return ders;
-}
+    public Ders getDersById(int dersKodu) {
+        Ders ders = repository.findDersById(dersKodu);
+        return ders;
+    }
 
 
-
-
-
-
-
-
-
-
-public void listDersByeNameOrLastname(){
+    public void listDersByeNameOrLastname() {
         System.out.println("Ders adı:");
         String dersAd = inp.nextLine();
-        List<Ders> dersList = repository.findDersByNameOrLastname(dersAd );
-        if (dersList.size()==0){
+        List<Ders> dersList = repository.findDersByNameOrLastname(dersAd);
+        if (dersList.size() == 0) {
             System.out.println("Bu ders adı bulunamadı");
-        }else {
+        } else {
             dersList.forEach(System.out::println);
         }
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -23,11 +23,10 @@ public class DersServis {
         String kredi = inp.nextLine();
         System.out.println("Ogrenci Sayisi : ");
         String ogrSayisi = inp.next();
+        inp.nextLine();
         System.out.println("Ogrenci Adi : ");
         String ogrAdi = inp.nextLine().trim();
-        inp.nextLine();
         Ders newDers = new Ders(dersAdi, kredi, ogrSayisi, ogrAdi);
-        //   DersRepository repository = new DersRepository();
         repository.save(newDers);
     }
 

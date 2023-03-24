@@ -66,7 +66,7 @@ Proje:Student Management System
     }
 
     private static int getId(Scanner scanner) {
-        System.out.print("Ders Id: ");
+        System.out.print("Ders Kodu : ");
         return scanner.nextInt();
     }
 }

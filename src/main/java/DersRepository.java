@@ -13,7 +13,7 @@ public class DersRepository {
 
     private void getConnection() {
         try {
-            this.conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/courses","user","password");
+            this.conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/my_study","user_db","123456");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -68,7 +68,7 @@ public class DersRepository {
             prst.setString(3, ders.getOgrSayisi());
             prst.setString(4, ders.getOgrAdi());
             prst.executeUpdate();
-            System.out.println("Ders ekleme işlemi başarıyla gerçekleşti..");
+            System.out.println("Ders ekleme işlemi başarıyla gerçekleşti...");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -88,16 +88,16 @@ public class DersRepository {
         String sql = "select * from t_ders";
         try {
             ResultSet rs = st.executeQuery(sql);
-            System.out.println("+" + "-".repeat(70) + "+");
-            System.out.printf("| %-11s | %-15s | %-13s | %-5s | %-15s | \n",
-                    "Ders Kodu", "Ders Adi", "Ders Kredisi", "Ogr. Sayisi", "Ogretmen");
+            System.out.println("+" + "-".repeat(89) + "+");
+            System.out.printf("| %-15s | %-15s | %-15s | %-15s | %-15s | \n",
+                    "Ders Kodu", "Ders Adi", "Ders Kredisi", "Ogr. Sayisi", "Ogrenci Adi");
 
             while (rs.next()) {
-                System.out.printf("| %-11s | %-15s | %-13s | %-5s | %-15s | \n",
+                System.out.printf("| %-15s | %-15s | %-15s | %-15s | %-15s | \n",
                         rs.getInt("dersKodu"), rs.getString("dersAdi"), rs.getString("kredi"),
                         rs.getInt("ogrSayisi"), rs.getString("ogrAdi"));
             }
-            System.out.println("+" + "-".repeat(70) + "+");
+            System.out.println("+" + "-".repeat(89) + "+");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {

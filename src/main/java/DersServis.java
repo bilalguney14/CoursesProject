@@ -17,11 +17,11 @@ public class DersServis {
 
     //11-öğrenci kaydetme
     public void saveDers() {
-        System.out.println("Ders Adi: ");
+        System.out.println("Ders Adi : ");
         String dersAdi = inp.nextLine().trim();
-        System.out.println("Kredi: ");
+        System.out.println("Kredi : ");
         String kredi = inp.nextLine();
-        System.out.println("Ogrenci Sayisi: ");
+        System.out.println("Ogrenci Sayisi : ");
         String ogrSayisi = inp.next();
         System.out.println("Ogrenci Adi : ");
         String ogrAdi = inp.nextLine().trim();
@@ -40,15 +40,15 @@ public class DersServis {
     public void updateDers(int dersKodu) {
         Ders ders = getDersById(dersKodu);
         if (ders == null) {
-            System.out.println("ders bulunamadi.");
+            System.out.println("Ders bulunamadi!");
         } else {
-            System.out.println("Ders adi: ");
+            System.out.println("Ders Adi: ");
             String dersAdi = inp.nextLine();
             System.out.println("Kredi: ");
             String kredi = inp.nextLine();
             System.out.println("Ogrenci sayisi: ");
             String ogrSayisi = inp.nextLine();
-            System.out.println("Ogretmen Adi: ");
+            System.out.println("Ogrenci Adi: ");
             String ogrAdi = inp.nextLine();
 
 
@@ -74,11 +74,11 @@ public class DersServis {
 
 
     public void listDersByeNameOrLastname() {
-        System.out.println("Ders adı:");
+        System.out.println("Ders Adı:");
         String dersAd = inp.nextLine();
         List<Ders> dersList = repository.findDersByNameOrLastname(dersAd);
         if (dersList.size() == 0) {
-            System.out.println("Bu ders adı bulunamadı");
+            System.out.println("Bu ders bulunamadı!");
         } else {
             dersList.forEach(System.out::println);
         }
